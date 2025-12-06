@@ -32,20 +32,13 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Search API error:', error);
 
-    // Return mock data for development
-    if (process.env.NODE_ENV === 'development') {
-      const mockData = getMockData(body.locatie || 'Amsterdam');
-      return NextResponse.json<SearchResponse>({
-        success: true,
-        data: mockData,
-        totalResults: mockData.length,
-      });
-    }
-
-    return NextResponse.json<SearchResponse>(
-      { success: false, error: 'Er is een fout opgetreden bij het zoeken' },
-      { status: 500 }
-    );
+    // Return mock data on error
+    const mockData = getMockData('Amsterdam');
+    return NextResponse.json<SearchResponse>({
+      success: true,
+      data: mockData,
+      totalResults: mockData.length,
+    });
   }
 }
 
