@@ -159,7 +159,9 @@ export function AddressAutocomplete({ onSelect, placeholder = "Typ een adres of 
         )}
         {!isLoading && selectedAddress && (
           <button
+            type="button"
             onClick={handleClear}
+            aria-label="Wis invoer"
             className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
           >
             <X className="w-3 h-3 text-white/70" />
@@ -169,7 +171,7 @@ export function AddressAutocomplete({ onSelect, placeholder = "Typ een adres of 
 
       {/* Suggestions dropdown */}
       {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute z-50 w-full mt-1 bg-[#1a1a2e]/98 backdrop-blur-xl border border-white/10 rounded-lg overflow-hidden shadow-2xl">
+        <div className="absolute z-50 w-full mt-1 bg-[#16213e] backdrop-blur-xl border-2 border-white/20 rounded-xl overflow-hidden shadow-2xl shadow-black/50">
           {suggestions.map((suggestion) => {
             const city = extractCity(suggestion.address);
             const addr = suggestion.address;
@@ -178,18 +180,18 @@ export function AddressAutocomplete({ onSelect, placeholder = "Typ een adres of 
               <button
                 key={suggestion.place_id}
                 onClick={() => handleSelect(suggestion)}
-                className="w-full px-3 py-2.5 text-left hover:bg-white/10 transition-colors flex items-center gap-2 border-b border-white/5 last:border-0"
+                className="w-full px-4 py-3 text-left hover:bg-[#e94560]/20 hover:border-l-4 hover:border-[#e94560] transition-all flex items-center gap-3 border-b border-white/10 last:border-0"
               >
-                <MapPin className="w-4 h-4 text-[#e94560] flex-shrink-0" />
+                <MapPin className="w-5 h-5 text-[#e94560] flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <div className="text-white text-sm font-medium truncate">
+                  <div className="text-white text-sm font-semibold truncate">
                     {addr.road ? `${addr.road}${addr.house_number ? ` ${addr.house_number}` : ''}` : city}
                   </div>
-                  <div className="text-white/40 text-xs truncate">
+                  <div className="text-white/60 text-xs truncate mt-0.5">
                     {addr.postcode && `${addr.postcode}, `}{city}
                   </div>
                 </div>
-                <div className="px-1.5 py-0.5 bg-[#e94560]/20 rounded text-[10px] text-[#e94560] font-medium flex-shrink-0">
+                <div className="px-2 py-1 bg-[#e94560] rounded-lg text-xs text-white font-semibold flex-shrink-0">
                   {city}
                 </div>
               </button>
