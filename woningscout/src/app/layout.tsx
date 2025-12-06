@@ -3,6 +3,7 @@ import './globals.css';
 import { Navbar } from './components/Navbar';
 import { TransitionProvider } from './components/TransitionProvider';
 import { AuthProvider } from '@/context/AuthContext';
+import FloatingLines from './components/FloatingLines';
 
 export const metadata: Metadata = {
   title: 'WoningScout - Vind jouw droomwoning',
@@ -25,11 +26,9 @@ export default function RootLayout({
     <html lang="nl">
       <body className="antialiased">
         <AuthProvider>
-          {/* Background decorations - fixed, no animation */}
-          <div className="fixed inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-[10%] right-[10%] w-[300px] h-[300px] bg-[#e94560]/15 rounded-full blur-[80px]" />
-            <div className="absolute bottom-[20%] left-[5%] w-[400px] h-[400px] bg-blue-400/10 rounded-full blur-[100px]" />
-            <div className="absolute top-[50%] left-[50%] w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2" />
+          {/* Animated background */}
+          <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+            <FloatingLines />
           </div>
 
           {/* Fixed Navbar - blijft staan tijdens page transitions */}
